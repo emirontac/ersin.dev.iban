@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111111">
+<title>Ersin Dev - Ödeme Bilgileri</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+  padding:20px; background:#f3f3f3; color:#111; font-family:Arial,Helvetica,sans-serif;
+}
+.card{
+  width:100%; max-width:430px; background:#fff; border-radius:24px; padding:30px 22px;
+  box-shadow:0 10px 35px rgba(0,0,0,.10);
+}
+h1{text-align:center;margin:0 0 7px;font-size:28px}
+.bank{text-align:center;color:#777;margin:-2px 0 6px;font-size:16px;font-weight:600}.subtitle{text-align:center;color:#777;margin:0 0 28px;font-size:14px}
+.label{font-size:13px;font-weight:700;color:#777;margin:0 0 8px}
+.row{
+  display:flex; align-items:center; gap:10px; background:#f5f5f5; border-radius:14px;
+  padding:15px; margin-bottom:20px;
+}
+.value{flex:1; min-width:0; overflow-wrap:anywhere; font-size:16px; line-height:1.35}
+button{
+  border:0; background:#111; color:#fff; border-radius:11px; padding:11px 13px;
+  font-size:14px; font-weight:700; cursor:pointer; white-space:nowrap;
+}
+button:active{transform:scale(.97)}
+.status{text-align:center;min-height:20px;color:#555;font-size:13px;margin-top:4px}
+.footer{text-align:center;color:#aaa;font-size:11px;margin-top:24px}
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Ersin Dev</h1>
+  <p class="bank">Enpara Bank A.Ş.</p>
+  <p class="subtitle">Ödeme Bilgileri</p>
+
+  <div class="label">İsim Soyisim</div>
+  <div class="row">
+    <div class="value" id="name">Ersin Dev</div>
+    <button onclick="copyText('Ersin Dev','İsim kopyalandı ✓')">📋 Kopyala</button>
+  </div>
+
+  <div class="label">IBAN</div>
+  <div class="row">
+    <div class="value" id="iban">TR80 0001 5700 0000 0001 4488 9906</div>
+    <button onclick="copyText('TR80000157000000000144889906','IBAN kopyalandı ✓')">📋 Kopyala</button>
+  </div>
+
+  <div class="status" id="status"></div>
+</div>
+
+<script>
+async function copyText(text, message){
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch(e) {
+    const t=document.createElement('textarea');
+    t.value=text; document.body.appendChild(t); t.select();
+    document.execCommand('copy'); t.remove();
+  }
+  document.getElementById('status').textContent=message;
+  setTimeout(()=>document.getElementById('status').textContent='',1800);
+}
+</script>
+</body>
+</html>
